@@ -1,5 +1,5 @@
 import React from "react"
-import { exVatToIncVat, incVatToExtVat } from "../calculations"
+import { exVatToIncVat, incVatToExtVat, calculateVat } from "../calculations"
 
 class App extends React.Component {
   constructor(props) {
@@ -15,22 +15,24 @@ class App extends React.Component {
   setVat = (event) => {
     console.log("Byter moms", event.target.value)
     this.setState({
-      vatRate: parseInt(event.target.value),
-      incVat: exVatToIncVat(event.target.value, parseInt(this.state.exVat)),
+      vatRate: parseInt(event.target.value, 10),
+      incVat: exVatToIncVat(event.target.value, parseInt(this.state.exVat, 10)),
+      // sumVat: this.state.incVat - this.state.exVat
+      // sumVat: calculateVat(parseInt(this.state.incVat, 10), parseInt(this.state.excVat, 10))
     })
   }
 
   handleChangeExVat = (event) => {
     this.setState({
-      incVat: exVatToIncVat(this.state.vatRate, parseInt(event.target.value)),
-      exVat: parseInt(event.target.value)
+      incVat: exVatToIncVat(this.state.vatRate, parseInt(event.target.value, 10)),
+      exVat: parseInt(event.target.value, 10)
     })
   }
 
   handleChangeIncVat = (event) => {
     this.setState({
-      exVat: incVatToExtVat(this.state.vatRate, parseInt(event.target.value)),
-      incVat: parseInt(event.target.value)
+      exVat: incVatToExtVat(this.state.vatRate, parseInt(event.target.value, 10)),
+      incVat: parseInt(event.target.value, 10)
     })
   }
 
@@ -53,16 +55,24 @@ class App extends React.Component {
             6%
           </label>
 
-          <label>
-            Exlusive moms
-            <input name="exVat" type="number" value={parseInt(this.state.exVat)} onChange={this.handleChangeExVat} />
-          </label>
-          <label>
-            Inklusive moms
-            <input name="incVat" type="number" value={parseInt(this.state.incVat)} onChange={this.handleChangeIncVat} />
-          </label>
-          {/* <input name="sumVat" type="number" value={this.state.sumVat} onChange={this.calculateVat} /> */}
-
+          <p>
+            <label>
+              Inklusive moms
+              <input name="incVat" type="number" value={parseInt(this.state.incVat, 10)} onChange={this.handleChangeIncVat} />
+            </label>
+          </p>
+          <p>
+            <label>
+              Exlusive moms
+              <input name="exVat" type="number" value={parseInt(this.state.exVat, 10)} onChange={this.handleChangeExVat} />
+            </label>
+          </p>
+          <p>
+            <label>
+              Momssumma
+              <input name="sumVat" type="number" value={this.state.incVat - this.state.exVat} />
+            </label>
+          </p>
         </form>
       </div>
     )
