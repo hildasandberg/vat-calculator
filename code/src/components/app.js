@@ -1,5 +1,5 @@
 import React from "react"
-import { exVatToIncVat, incVatToExtVat, calculateVat } from "../calculations"
+import { exVatToIncVat, incVatToExtVat } from "../calculations"
 
 class App extends React.Component {
   constructor(props) {
@@ -7,8 +7,7 @@ class App extends React.Component {
     this.state = {
       vatRate: 25,
       incVat: 0,
-      exVat: 0,
-      sumVat: 0
+      exVat: 0
     }
   }
 
@@ -16,9 +15,7 @@ class App extends React.Component {
     console.log("Byter moms", event.target.value)
     this.setState({
       vatRate: parseInt(event.target.value, 10),
-      incVat: exVatToIncVat(event.target.value, parseInt(this.state.exVat, 10)),
-      // sumVat: this.state.incVat - this.state.exVat
-      // sumVat: calculateVat(parseInt(this.state.incVat, 10), parseInt(this.state.excVat, 10))
+      incVat: exVatToIncVat(event.target.value, parseInt(this.state.exVat, 10))
     })
   }
 
@@ -53,6 +50,10 @@ class App extends React.Component {
           <label>
             <input type="radio" value="6" name="radioVat" onChange={this.setVat} />
             6%
+          </label>
+          <label>
+            <input type="radio" value={parseInt(this.state.vatRate, 10)} name="radioVat" onChange={this.setVat} />
+            <input type="number" value={parseInt(this.state.vatRate, 10)} onChange={this.setVat} />Egen momssumma
           </label>
 
           <p>
