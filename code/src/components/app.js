@@ -36,25 +36,33 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <p>Example calculating ex vat for 1000kr inc vat @ 25%: {incVatToExtVat(25, 1000)}</p>
-        <p>Example calculating inc vat for 600kr ex vat @ 6%: {exVatToIncVat(6, 600)}</p>
+        <h1>MOMSSNURRAN</h1>
         <form>
-          <label>
-            <input type="radio" value="25" name="radioVat" onChange={this.setVat} />
-            25%
-          </label>
-          <label>
-            <input type="radio" value="12" name="radioVat" onChange={this.setVat} />
-            12%
-          </label>
-          <label>
-            <input type="radio" value="6" name="radioVat" onChange={this.setVat} />
-            6%
-          </label>
-          <label>
-            <input type="radio" value={parseInt(this.state.vatRate, 10)} name="radioVat" onChange={this.setVat} />
-            <input type="number" value={parseInt(this.state.vatRate, 10)} onChange={this.setVat} />Egen momssumma
-          </label>
+          <p>
+            <label>
+              <input type="radio" value="25" name="radioVat" onChange={this.setVat} />
+              25%
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="radio" value="12" name="radioVat" onChange={this.setVat} />
+              12%
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="radio" value="6" name="radioVat" onChange={this.setVat} />
+              6%
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="radio" value={parseInt(this.state.vatRate, 10)} name="radioVat" onChange={this.setVat} />
+              Egen momssumma
+              <input type="number" value={parseInt(this.state.vatRate, 10)} onChange={this.setVat} />
+            </label>
+          </p>
 
           <p>
             <label>
